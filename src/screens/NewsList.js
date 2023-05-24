@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from "react";
-import {Text, StyleSheet, View, FlatList, Image, Button} from 'react-native';
+import {Text, StyleSheet, View, FlatList, Image, Button, TouchableOpacity} from 'react-native';
 import axios from "axios";
 
 function fetchNewsList(page){
@@ -17,14 +17,29 @@ function fetchNewsList(page){
   }
 
 
-const NewsList = function({navigation}) {
+const NewsList = function({route, navigation}) {
+    const pagina = Number(navigation.getParam('page'));
+    const datos = fetchNewsList(pagina);
     
-    const datos = fetchNewsList(0);
     
     //<Text>{item.id}</Text>
       return (
     <View>
-    <Text>NOTICIAS</Text>     
+     <View style={{padding: 8, flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Button 
+            title='Home' 
+            onPress={() => {
+              navigation.navigate('Home');
+            }}
+            color='green'
+            />
+              
+        <Button
+            title='Siguiente' 
+            onPress={() => {
+              navigation.push('Noticias',{page: pagina+1});
+            }} /> 
+        </View> 
     <FlatList
         data={datos}
         renderItem={({ item }) => {
@@ -46,6 +61,7 @@ const NewsList = function({navigation}) {
         }}
     
     ></FlatList>
+    
     </View>  
     );
 }

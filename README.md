@@ -1,0 +1,1 @@
+Este es un proyecto de una aplicación móvil desarrollada en React Native que se conecta a la API de la facultad de Ciencias y Tecnologia mediante la biblioteca Axios para obtener y mostrar las últimas noticias.
